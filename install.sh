@@ -4,6 +4,7 @@ set -eu
 TARGET_DIRS="
 $HOME/.claude/skills
 $HOME/.codex/skills
+$HOME/.gemini/config/skills
 $HOME/.pi/agent/skills
 "
 
