@@ -1,0 +1,49 @@
+#!/bin/bash
+set -e
+deny_list=()
+
+# .env files under $PWD
+while IFS= read -r -d '' X; do
+    deny_list+=(--ro-bind /dev/null "$X")
+done < <(find "$PWD" -name .env -type f -print0 2>/dev/null)
+
+# .env files anywhere (as per last locate db update)
+while IFS= read -r -d '' X; do
+    test -f "$X" && deny_list+=(--ro-bind /dev/null "$X")
+done < <(locate -0 -b -r '^\.env$')
+
+# Needed for www-open to open URLs
+bus="/run/user/1000/coding-agent-sandbox-$$.bus"
+exec 3< <(exec xdg-dbus-proxy --fd=1 "$DBUS_SESSION_BUS_ADDRESS" "$bus" --filter --talk=org.freedesktop.portal.Desktop)
+read -r -n1 -u3
+
+exec bwrap \
+     --ro-bind / / \
+     --dev-bind /dev /dev \
+     --proc /proc \
+     --tmpfs /tmp \
+     --bind "$PWD" "$PWD" \
+     --bind $HOME/.aws/cli/cache $HOME/.aws/cli/cache \
+     --bind $HOME/.aws/sso/cache $HOME/.aws/sso/cache \
+     --bind $HOME/.cache $HOME/.cache \
+     --bind $HOME/.claude $HOME/.claude \
+     --bind $HOME/.claude.json $HOME/.claude.json \
+     --bind $HOME/.codex $HOME/.codex \
+     --bind $HOME/.local/share/claude $HOME/.local/share/claude \
+     --bind $HOME/.local/state/claude $HOME/.local/state/claude \
+     --bind $HOME/.npm $HOME/.npm \
+     --bind $HOME/.npm-global $HOME/.npm-global \
+     --bind $HOME/.pi $HOME/.pi \
+     --tmpfs /run/user/1000 \
+     --bind "$bus" /run/user/1000/bus \
+     --bind /run/user/1000/gcr /run/user/1000/gcr \
+     --perms 000 --tmpfs $HOME/.gnupg \
+     --tmpfs /etc/ssh/ssh_config.d \
+     --perms 700 --tmpfs $HOME/.ssh \
+     --ro-bind $HOME/.ssh/known_hosts $HOME/.ssh/known_hosts \
+     --ro-bind /dev/null /run/docker.sock \
+     "${deny_list[@]}" \
+     --setenv BROWSER www-open \
+     --setenv GH_BROWSER www-open \
+     --chdir "$PWD" \
+     "$@"

@@ -1,0 +1,5 @@
+#!/bin/sh
+exec coding-agent-sandbox \
+     $HOME/.npm-global/bin/codex \
+     --dangerously-bypass-approvals-and-sandbox \
+     "$@"

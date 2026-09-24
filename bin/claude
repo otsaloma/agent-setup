@@ -1,0 +1,5 @@
+#!/bin/sh
+exec coding-agent-sandbox \
+     $HOME/.local/bin/claude \
+     --dangerously-skip-permissions \
+     "$@"
