@@ -29,6 +29,7 @@ exec bwrap \
      --bind $HOME/.claude $HOME/.claude \
      --bind $HOME/.claude.json $HOME/.claude.json \
      --bind $HOME/.codex $HOME/.codex \
+     --bind $HOME/.local/bin $HOME/.local/bin \
      --bind $HOME/.local/share/claude $HOME/.local/share/claude \
      --bind $HOME/.local/state/claude $HOME/.local/state/claude \
      --bind $HOME/.npm $HOME/.npm \
