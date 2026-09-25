@@ -19,9 +19,12 @@ while IFS= read -r -d '' X; do
     test -f "$X" && deny_list+=(--ro-bind /dev/null "$X")
 done < <(locate -0 -b -r '^\.env$')
 
-# Needed for www-open to open URLs
+# Needed for notify-send and www-open
 bus="/run/user/1000/coding-agent-sandbox-$$.bus"
-exec 3< <(exec xdg-dbus-proxy --fd=1 "$DBUS_SESSION_BUS_ADDRESS" "$bus" --filter --talk=org.freedesktop.portal.Desktop)
+exec 3< <(exec xdg-dbus-proxy \
+          --fd=1 "$DBUS_SESSION_BUS_ADDRESS" "$bus" --filter \
+          --talk=org.freedesktop.Notifications \
+          --talk=org.freedesktop.portal.Desktop)
 read -r -n1 -u3
 
 exec bwrap \
