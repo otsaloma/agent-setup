@@ -16,7 +16,7 @@ done < <(find "$PWD" -name .env -type f -print0 2>/dev/null
          locate -0 -b -r '^\.env$')
 
 # Needed for notify-send and www-open
-bus="/run/user/1000/coding-agent-sandbox-$$.bus"
+bus="$XDG_RUNTIME_DIR/coding-agent-sandbox-$$.bus"
 exec 3< <(exec xdg-dbus-proxy \
           --fd=1 "$DBUS_SESSION_BUS_ADDRESS" "$bus" --filter \
           --talk=org.freedesktop.Notifications \
@@ -43,9 +43,9 @@ exec bwrap \
      --bind $HOME/.npm-global $HOME/.npm-global \
      --bind $HOME/.pi $HOME/.pi \
      "${allow_list[@]}" \
-     --tmpfs /run/user/1000 \
-     --bind "$bus" /run/user/1000/bus \
-     --bind /run/user/1000/gcr /run/user/1000/gcr \
+     --tmpfs $XDG_RUNTIME_DIR \
+     --bind "$bus" $XDG_RUNTIME_DIR/bus \
+     --bind $XDG_RUNTIME_DIR/gcr $XDG_RUNTIME_DIR/gcr \
      --perms 000 --tmpfs $HOME/.gnupg \
      --tmpfs /etc/ssh/ssh_config.d \
      --perms 700 --tmpfs $HOME/.ssh \
