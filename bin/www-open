@@ -1,0 +1,7 @@
+#!/bin/sh
+# Needed instead of xdg-open by sandboxed coding agents.
+exec gdbus call --session \
+     --dest org.freedesktop.portal.Desktop \
+     --object-path /org/freedesktop/portal/desktop \
+     --method org.freedesktop.portal.OpenURI.OpenURI \
+     '' "${1:?Usage: www-open URL}" '{}'
