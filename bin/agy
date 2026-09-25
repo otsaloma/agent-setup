@@ -1,0 +1,5 @@
+#!/bin/sh
+exec coding-agent-sandbox \
+     $HOME/.local/bin/agy \
+     --dangerously-skip-permissions \
+     "$@"
