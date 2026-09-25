@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
+allow_list=()
 deny_list=()
+
+# System-specific files and directories
+IFS=: read -r -a allow_paths <<< "${CODING_AGENT_SANDBOX_ALLOW:-}"
+for path in "${allow_paths[@]}"; do
+    test -n "$path" && allow_list+=(--bind "$path" "$path")
+done
 
 # .env files under $PWD
 while IFS= read -r -d '' X; do
@@ -35,6 +42,7 @@ exec bwrap \
      --bind $HOME/.npm $HOME/.npm \
      --bind $HOME/.npm-global $HOME/.npm-global \
      --bind $HOME/.pi $HOME/.pi \
+     "${allow_list[@]}" \
      --tmpfs /run/user/1000 \
      --bind "$bus" /run/user/1000/bus \
      --bind /run/user/1000/gcr /run/user/1000/gcr \
