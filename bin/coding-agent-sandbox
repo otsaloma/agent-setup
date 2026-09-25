@@ -9,15 +9,11 @@ for path in "${allow_paths[@]}"; do
     test -n "$path" && allow_list+=(--bind "$path" "$path")
 done
 
-# .env files under $PWD
-while IFS= read -r -d '' X; do
-    deny_list+=(--ro-bind /dev/null "$X")
-done < <(find "$PWD" -name .env -type f -print0 2>/dev/null)
-
-# .env files anywhere (as per last locate db update)
-while IFS= read -r -d '' X; do
-    test -f "$X" && deny_list+=(--ro-bind /dev/null "$X")
-done < <(locate -0 -b -r '^\.env$')
+# .env files under $PWD and anywhere else (as per last locate db update)
+while IFS= read -r -d '' env; do
+    test -f "$env" && deny_list+=(--ro-bind /dev/null "$env")
+done < <(find "$PWD" -name .env -type f -print0 2>/dev/null
+         locate -0 -b -r '^\.env$')
 
 # Needed for notify-send and www-open
 bus="/run/user/1000/coding-agent-sandbox-$$.bus"
