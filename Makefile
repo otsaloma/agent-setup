@@ -1,5 +1,9 @@
 # -*- coding: utf-8-unix -*-
 
+ifeq ($(shell id -u),0)
+$(error Do not run as root, this installs to your home directory)
+endif
+
 install: install-bin install-skills install-agents-md
 
 ensure-dirs:
