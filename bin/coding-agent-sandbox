@@ -23,6 +23,14 @@ exec 3< <(exec xdg-dbus-proxy \
           --talk=org.freedesktop.portal.Desktop)
 read -r -n1 -u3
 
+# Needed for GUI tests
+wayland=()
+if test -n "$WAYLAND_DISPLAY"; then
+    wayland+=(--ro-bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
+              --setenv GTK_A11Y none
+              --unsetenv DISPLAY)
+fi
+
 exec bwrap \
      --ro-bind / / \
      --dev-bind /dev /dev \
@@ -46,6 +54,7 @@ exec bwrap \
      --tmpfs $XDG_RUNTIME_DIR \
      --bind "$bus" $XDG_RUNTIME_DIR/bus \
      --bind $XDG_RUNTIME_DIR/gcr $XDG_RUNTIME_DIR/gcr \
+     "${wayland[@]}" \
      --perms 000 --tmpfs $HOME/.gnupg \
      --tmpfs /etc/ssh/ssh_config.d \
      --perms 700 --tmpfs $HOME/.ssh \
