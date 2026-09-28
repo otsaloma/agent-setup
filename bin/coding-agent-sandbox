@@ -20,7 +20,7 @@ while IFS= read -r -d '' env; do
 done < <(find "$PWD" -name .env -type f -print0 2>/dev/null
          locate -0 -b -r '^\.env$')
 
-# Needed for notify-send, www-open and gh keyring access
+# Allow D-Bus access for notify-send, www-open and gh token in keyring
 bus="$XDG_RUNTIME_DIR/coding-agent-sandbox-$$.bus"
 exec 3< <(exec xdg-dbus-proxy \
           --fd=1 "$DBUS_SESSION_BUS_ADDRESS" "$bus" --filter \
@@ -29,7 +29,7 @@ exec 3< <(exec xdg-dbus-proxy \
           --talk=org.freedesktop.secrets)
 read -r -n1 -u3
 
-# Needed for GUI tests
+# Allow Wayland display for GUI tests
 wayland=()
 if test -n "$WAYLAND_DISPLAY"; then
     wayland+=(--ro-bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
