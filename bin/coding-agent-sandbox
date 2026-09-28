@@ -9,6 +9,11 @@ for path in "${allow_paths[@]}"; do
     test -n "$path" && allow_list+=(--bind "$path" "$path")
 done
 
+# Docker (potential root access!)
+if test -z "${CODING_AGENT_SANDBOX_ALLOW_DOCKER:-}"; then
+    deny_list+=(--ro-bind /dev/null /run/docker.sock)
+fi
+
 # .env files under $PWD and anywhere else (as per last locate db update)
 while IFS= read -r -d '' env; do
     test -f "$env" && deny_list+=(--ro-bind /dev/null "$env")
@@ -59,7 +64,6 @@ exec bwrap \
      --tmpfs /etc/ssh/ssh_config.d \
      --perms 700 --tmpfs $HOME/.ssh \
      --ro-bind $HOME/.ssh/known_hosts $HOME/.ssh/known_hosts \
-     --ro-bind /dev/null /run/docker.sock \
      "${deny_list[@]}" \
      --setenv BROWSER www-open \
      --setenv GH_BROWSER www-open \
