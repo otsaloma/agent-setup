@@ -39,7 +39,7 @@ Examples of what to look for:
   technologies, conventions, etc. Are we aligned with those? Examples
   from Linux desktop: latest theming and UI-design patterns, dark theme
   support, freedesktop.org portals, permission and sandboxing
-  conventions. Which apply to us? What should we change to be in-line
+  conventions. Which apply to us? What should we change to be in line
   with the wider state-of-the-art?
 
 Report your findings ordered by payoff. Classify payoff as "low",
