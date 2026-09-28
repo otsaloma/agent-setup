@@ -21,9 +21,11 @@ done < <(find "$PWD" -name .env -type f -print0 2>/dev/null
          locate -0 -b -r '^\.env$')
 
 # Allow D-Bus access for notify-send, www-open and gh token in keyring
+# and owning names of our own GApplications for single-instance tests
 bus="$XDG_RUNTIME_DIR/coding-agent-sandbox-$$.bus"
 exec 3< <(exec xdg-dbus-proxy \
           --fd=1 "$DBUS_SESSION_BUS_ADDRESS" "$bus" --filter \
+          --own=io.otsaloma.* \
           --talk=org.freedesktop.Notifications \
           --talk=org.freedesktop.portal.Desktop \
           --talk=org.freedesktop.secrets)
