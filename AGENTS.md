@@ -3,6 +3,14 @@
 - Don't try to clobber (I have `noclobber` on).
 - Use `www-open URL` to open links in a browser
 
+## Sandbox
+
+You're running inside a Bubblewrap (`bwrap`) sandbox, your permissions
+are limited. If you encounter missing permissions for something you
+legitimately need to do, stop and ask for those permissions to be added
+rather than try to work around the problem. Be specific in your request:
+what permissions you need and why.
+
 ## Git
 
 Start your commit message title with an appropriate verb like "Add",
