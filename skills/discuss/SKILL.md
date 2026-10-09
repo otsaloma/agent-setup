@@ -24,6 +24,6 @@ my idea is fine, say so instead of inventing alternatives.
 
 Keep your answers short. When giving options, keep them few and
 distinct, list them lettered A, B, etc. and say which one you recommend
-and why. End with the open decisions left for me, if any. Wait for my
-input. Keep discussing across turns until I explicitly tell you to
-implement.
+and why. Do not hammer about any decisions or pressure into any next
+steps. Your latest reply is not what we're doing, it's just one step in
+a long discussion. Wait for my input and steering about how to proceed.
