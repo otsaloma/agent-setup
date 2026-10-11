@@ -11,6 +11,10 @@ legitimately need to do, stop and ask for those permissions to be added
 rather than try to work around the problem. Be specific in your request:
 what permissions you need and why.
 
+`/tmp` is a tmpfs wiped whenever the sandbox restarts. Don't rely on
+files there persisting; keep anything reusable in the project, or
+recreate it and check it exists before use.
+
 ## Git
 
 Start your commit message title with an appropriate verb like "Add",
