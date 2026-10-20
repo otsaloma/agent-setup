@@ -54,6 +54,7 @@ exec bwrap \
      --bind $HOME/.gemini $HOME/.gemini \
      --bind $HOME/.local/bin $HOME/.local/bin \
      --bind $HOME/.local/share/claude $HOME/.local/share/claude \
+     --bind $HOME/.local/share/uv $HOME/.local/share/uv \
      --bind $HOME/.local/state/claude $HOME/.local/state/claude \
      --bind $HOME/.npm $HOME/.npm \
      --bind $HOME/.npm-global $HOME/.npm-global \
