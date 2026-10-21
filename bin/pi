@@ -1,4 +1,4 @@
 #!/bin/sh
 exec coding-agent-sandbox \
-     $HOME/.npm-global/bin/pi \
+     $HOME/.local/bin/pi \
      "$@"
