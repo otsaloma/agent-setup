@@ -1,5 +1,5 @@
 ---
-name: pr
+name: github-pr
 description: Prepare a GitHub pull request for the current work —
   branch off, commit and push as needed, then prefill the PR title and
   description and open it in a web browser for the user to review and
