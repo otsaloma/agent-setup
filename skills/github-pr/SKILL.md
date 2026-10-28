@@ -41,7 +41,9 @@ Description should be one short paragraph. Do not include technical
 details like lists of symbols changed.
 
 Write the description as unwrapped paragraphs, using proper Markdown
-formatting for inline code etc. If the work resolves an issue from a
-tracker, end the description with `Closes` followed by the issue
-reference, e.g. `Closes #123` or `Closes ENG-123`. Do not include any
-attribution line of your own.
+formatting for inline code etc. If fixing or continuing something
+related to a previous PR, reference that PR in the description by its
+number (`#123`). If the work resolves an issue from a tracker, end the
+description with `Closes` followed by the issue reference, e.g. `Closes
+#123` or `Closes ENG-123`. Do not include any attribution line of your
+own.

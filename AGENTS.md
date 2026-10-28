@@ -15,7 +15,7 @@ what permissions you need and why.
 files there persisting; keep anything reusable in the project, or
 recreate it and check it exists before use.
 
-## Git
+## Git Commits
 
 Start your commit message title with an appropriate verb like "Add",
 "Fix" or "Refactor" that describes the nature of the change.
