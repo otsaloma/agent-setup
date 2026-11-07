@@ -1,6 +1,7 @@
 # AGENTS.md
 
-- Don't try to clobber (I have `noclobber` on).
+- Don't try to clobber (I have `noclobber` on)
+- Don't wait for processes with `pgrep -f PATTERN` as it matches its own shell too
 - Use `www-open URL` to open links in a browser
 
 ## Sandbox
