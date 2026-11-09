@@ -70,7 +70,11 @@ exec bwrap \
      --bind "$bus" $XDG_RUNTIME_DIR/bus \
      --bind $XDG_RUNTIME_DIR/gcr $XDG_RUNTIME_DIR/gcr \
      "${wayland[@]}" \
+     --ro-bind /dev/null $HOME/.aws/credentials \
+     --perms 000 --tmpfs $HOME/.config/BraveSoftware \
+     --perms 000 --tmpfs $HOME/.config/rclone \
      --perms 000 --tmpfs $HOME/.gnupg \
+     --perms 000 --tmpfs $HOME/.local/share/keyrings \
      --tmpfs /etc/ssh/ssh_config.d \
      --perms 700 --tmpfs $HOME/.ssh \
      --ro-bind $HOME/.ssh/known_hosts $HOME/.ssh/known_hosts \
