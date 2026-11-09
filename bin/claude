@@ -1,4 +1,10 @@
 #!/bin/sh
+if test "$1" = update; then
+    # Update needs to write the binary.
+    # Only allow that outside the sandbox.
+    exec $HOME/.local/bin/claude "$@"
+fi
+export DISABLE_AUTOUPDATER=1
 exec coding-agent-sandbox \
      $HOME/.local/bin/claude \
      --dangerously-skip-permissions \

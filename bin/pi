@@ -1,4 +1,9 @@
 #!/bin/sh
+if test "$1" = update; then
+    # Update needs to write the binary.
+    # Only allow that outside the sandbox.
+    exec $HOME/.local/bin/pi "$@"
+fi
 exec coding-agent-sandbox \
      $HOME/.local/bin/pi \
      "$@"
