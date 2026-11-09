@@ -15,7 +15,7 @@ You're looking for opportunities to improve the readability of code in
 scope. This is a quest to refactor, rename, clarify and simplify the
 codebase structure and execution flow. Nothing about the implementation
 is sacred, you can freely suggest major changes. Raising versions of
-dependencies is possible as well, but you need to justify that, You're
+dependencies is possible as well, but you need to justify that. You're
 not looking for bugs. You're not looking to add features. Rather make
 the code shorter than longer if you can.
 
