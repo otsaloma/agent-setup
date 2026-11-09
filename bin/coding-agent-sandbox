@@ -36,6 +36,8 @@ exec 3< <(exec xdg-dbus-proxy \
           --own=io.otsaloma.* \
           --talk=org.freedesktop.Notifications \
           --talk=org.freedesktop.portal.Desktop)
+# The proxy writes a byte to fd 3 when ready and exits when fd 3,
+# inherited by bwrap below, closes.
 read -r -n1 -u3
 
 # Pass gh token from keyring rather than open access to the whole
