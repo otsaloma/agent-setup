@@ -46,6 +46,8 @@ if test -n "$WAYLAND_DISPLAY"; then
 fi
 
 exec bwrap \
+     --unshare-pid \
+     --die-with-parent \
      --ro-bind / / \
      --dev-bind /dev /dev \
      --proc /proc \
