@@ -94,3 +94,7 @@ single feature should be as self-contained as possible.
    non-obvious mechanics and (3) non-obvious domain rationale.
    Surrounding older code might have silly comments, but that is not
    license for you to be silly.
+
+9. Before adding handling for an edge case, such as a guard against
+   misuse or a check for unusual input, name the real use that would hit
+   it. If you can't, leave it out. This applies to suggesting fixes too.
