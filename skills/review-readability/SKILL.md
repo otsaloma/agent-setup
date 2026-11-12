@@ -35,7 +35,7 @@ Examples of what to look for:
 - Dead code and write-only state
 - Defensive checks for things that can't happen
 - Hand-rolled versions of what the standard library provides
-- Helpers and constants extracted but used once
+- One-line helpers and constants extracted but used once
 - Inconsistent data structures passed around
 - Inconsistent function order
 - Names that mislead
@@ -46,6 +46,11 @@ Examples of what to look for:
 - Same concept under different names
 - The same logic in >2 places
 - Using outdated language or library features
+
+Keep named helpers that split a longer step into readable parts, even
+with a single caller. Keep explicit code explicit rather than folding it
+into generic helpers or loops over names. Keep named variables for
+unused return values rather than replacing them with `_`.
 
 Report your findings ordered by payoff. Classify payoff as "low",
 "medium" or "high". Only include "optional" suggestions if there's
